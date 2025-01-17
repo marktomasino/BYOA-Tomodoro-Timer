@@ -17,8 +17,14 @@ const restModeBtn = document.getElementById('rest-mode');
 function updateDisplay(timeLeft) {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
+    const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    // Update the display
     minutesDisplay.textContent = minutes.toString().padStart(2, '0');
     secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+    
+    // Update the document title
+    document.title = `${timeString} - Tomodoro Timer`;
 }
 
 function switchMode() {
