@@ -92,4 +92,146 @@ h1 {
 
 .mode-btn:hover:not(.active) {
     background-color: #e8e8e8;
-} 
+}
+
+.task-manager {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.task-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.task-input input {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.task-input button {
+    padding: 0.5rem 1rem;
+    background-color: #10C1EB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.task-item:hover {
+    background-color: #f5f5f5;
+}
+
+.task-radio {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0;
+    accent-color: #10C1EB;
+}
+
+.task-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-text {
+    margin-right: 1rem;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    align-items: center;
+}
+
+.task-item:hover .task-actions {
+    opacity: 1;
+}
+
+.task-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-actions button:hover {
+    background-color: #e0e0e0;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.task-item.selected {
+    background-color: #e3f2fd;
+}
+
+@keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.celebrate {
+    animation: celebrate 0.5s ease;
+}
+
+.task-edit-input {
+    font-size: inherit;
+    font-family: inherit;
+    border: 1px solid #10C1EB;
+    border-radius: 4px;
+    padding: 4px 8px;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+}
+
+.task-edit-input:focus {
+    box-shadow: 0 0 0 2px rgba(16, 193, 235, 0.2);
+}
+
+.task-duration {
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 8px;
+    font-family: monospace;
+}
