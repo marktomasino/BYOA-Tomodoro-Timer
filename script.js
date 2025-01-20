@@ -63,7 +63,12 @@ function startTimer() {
             if (task) {
                 task.duration += 1;
                 saveTasks(); // Save after updating duration
-                renderTasks(); // Update display
+                
+                // Only update the duration display instead of re-rendering everything
+                const selectedTaskElement = document.querySelector(`.task-item[data-task-id="${selectedTaskId}"] .task-duration`);
+                if (selectedTaskElement) {
+                    selectedTaskElement.textContent = formatDuration(task.duration);
+                }
             }
         }
         
@@ -255,6 +260,26 @@ function toggleTask(taskId) {
     if (task) {
         task.completed = !task.completed;
         saveTasks();
+        
+        // If this is the currently selected task and it's being completed
+        if (taskId === selectedTaskId && task.completed) {
+            // Stop the timer if it's running
+            if (timerId !== null) {
+                clearInterval(timerId);
+                timerId = null;
+                startButton.textContent = 'Start';
+            }
+            
+            // Clear the selected task
+            selectedTaskId = null;
+            statusText.textContent = 'Get Sh*t Done';
+            
+            // Prompt user to select another task
+            setTimeout(() => {
+                alert('Task completed! Please select another task to continue working.');
+            }, 500); // Small delay to allow the completion animation to play first
+        }
+        
         renderTasks();
         
         if (task.completed) {
