@@ -78,28 +78,33 @@ function startTimer() {
             clearInterval(timerId);
             timerId = null;
             
-            // Create audio context
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            
-            // Create oscillator and gain nodes
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            // Connect nodes
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            // Configure sound
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(880, audioContext.currentTime); // A5 note
-            gainNode.gain.setValueAtTime(0.005, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
-            
-            // Play sound
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.5);
-            
-            switchMode();
+            // Play completion sound
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime); // Increased volume
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+                
+                // Ensure mode switch happens after sound
+                setTimeout(() => {
+                    switchMode();
+                    startTimer(); // Automatically start the next timer
+                }, 500);
+            } catch (error) {
+                console.error('Error playing sound:', error);
+                // Still switch modes even if sound fails
+                switchMode();
+                startTimer();
+            }
         }
     }, 1000);
 
