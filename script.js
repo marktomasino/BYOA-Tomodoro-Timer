@@ -87,8 +87,8 @@ function startTimer() {
             // Configure sound
             oscillator.type = 'sine';
             oscillator.frequency.setValueAtTime(880, audioContext.currentTime); // A5 note
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            gainNode.gain.setValueAtTime(0.005, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
             
             // Play sound
             oscillator.start();
@@ -304,19 +304,19 @@ function toggleTask(taskId) {
             gainNode4.gain.setValueAtTime(0, startTime);
             
             // Volume for each note entry (with quick attack)
-            const peakVolume = 0.01;
+            const peakVolume = 0.002;
             
             // E6 enters on beat 1
-            gainNode1.gain.setTargetAtTime(peakVolume, startTime, 0.01);
+            gainNode1.gain.setTargetAtTime(peakVolume, startTime, 0.002);
             
             // G#6 enters on beat 2
-            gainNode2.gain.setTargetAtTime(peakVolume, startTime + beatDuration, 0.01);
+            gainNode2.gain.setTargetAtTime(peakVolume, startTime + beatDuration, 0.002);
             
             // B6 enters on beat 3
-            gainNode3.gain.setTargetAtTime(peakVolume, startTime + (beatDuration * 2), 0.01);
+            gainNode3.gain.setTargetAtTime(peakVolume, startTime + (beatDuration * 2), 0.002);
             
             // E7 enters on beat 4
-            gainNode4.gain.setTargetAtTime(peakVolume, startTime + (beatDuration * 3), 0.01);
+            gainNode4.gain.setTargetAtTime(peakVolume, startTime + (beatDuration * 3), 0.002);
             
             // All notes fade out together over the last 3 beats
             const fadeStartTime = startTime + (beatDuration * 4);
