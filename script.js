@@ -304,7 +304,7 @@ function toggleTask(taskId) {
             gainNode4.gain.setValueAtTime(0, startTime);
             
             // Volume for each note entry (with quick attack)
-            const peakVolume = 0.1;
+            const peakVolume = 0.01;
             
             // E6 enters on beat 1
             gainNode1.gain.setTargetAtTime(peakVolume, startTime, 0.01);
