@@ -191,6 +191,7 @@ function renderTasks() {
         radio.name = 'selected-task';
         radio.className = 'task-radio';
         radio.checked = task.id === selectedTaskId;
+        radio.disabled = task.completed;
         
         const taskContent = document.createElement('div');
         taskContent.className = 'task-content';
@@ -380,11 +381,14 @@ function toggleTask(taskId) {
 }
 
 function selectTask(taskId) {
-    selectedTaskId = taskId;
-    renderTasks();
     const task = tasks.find(t => t.id === taskId);
-    if (task) {
+    if (task && !task.completed) {
+        selectedTaskId = taskId;
+        renderTasks();
         statusText.textContent = `Working on: ${task.text}`;
+    } else if (task && task.completed) {
+        alert('Cannot select a completed task. Please uncomplete it first to work on it again.');
+        renderTasks(); // Re-render to ensure radio button is not checked
     }
 }
 
